@@ -29,11 +29,14 @@
         $data = json_decode(file_get_contents("php://input"), true);
         echo json_encode($taskController->create($data['descricao'], $data['tarefa'], $data['categoria'], $data['email']));
     
-    } elseif ($method === 'DELETE' && isset($_GET['id'])) {
-    
-        // 🔹 Apagar uma tarefa pelo ID
-        echo json_encode($taskController->deleteTask($_GET['id']));
-    
+    } elseif ($method === 'DELETE') {
+        $data = json_decode(file_get_contents("php://input"), true);
+        
+        if (isset($data['id'])) {
+            echo json_encode($taskController->deleteTask($data['id']));
+        } else {
+            echo json_encode(["success" => false, "message" => "ID não fornecido"]);
+        }
     } else {
         echo json_encode(["message" => "Método não suportado"]);
     }

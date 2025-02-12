@@ -49,12 +49,14 @@ class TaskController {
         try {
             $sql = "DELETE FROM entradas WHERE id = :id";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            return $stmt->execute();
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return ["success" => true, "message" => "Tarefa apagada com sucesso!"];
         } catch (PDOException $e) {
-            echo "Erro ao apagar a tarefa: " . $e->getMessage();
-            return false;
+            return ["success" => false, "message" => "Erro ao apagar a tarefa: " . $e->getMessage()];
         }
     }
+    
 }
 ?>
