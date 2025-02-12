@@ -1,5 +1,5 @@
 
-❌ ✅
+❌ ✅ 🟡
 ________________________________________
 
 1️⃣ Criar o Backend com PHP Puro e MySQL (XAMPP)
@@ -8,12 +8,12 @@ ________________________________________
 2.✅ Criar a base de dados no phpMyAdmin (exemplo: todo_list).
 3.✅ Criar tabelas para armazenar tarefas (tasks), usuários (users), categorias (categories), etc.
 4.✅ Criar um diretório para o projeto (exemplo: xampp/htdocs/todolist).
-5.❌ Criar arquivos PHP para:
+5.✅ Criar arquivos PHP para:
         Conectar ao banco de dados (exemplo: db.php).
         Gerenciar tarefas (criar, editar, excluir, listar).
         Autenticação de usuários (registro, login).
-6.❌ Criar API REST usando endpoints PHP para comunicação com o frontend.
-7.❌ Testar os endpoints com Postman ou Insomnia.
+6.🟡 Criar API REST usando endpoints PHP para comunicação com o frontend.
+7.✅ Testar os endpoints com Postman ou Insomnia.
 
 ________________________________________
 
