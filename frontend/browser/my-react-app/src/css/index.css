@@ -1,0 +1,35 @@
+
+.note{
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  max-width: 250px;
+  display: inline-block;
+  background-color: hsla(60, 72%, 55%, 0.37);
+}
+
+
+.note .titulo{
+  border: 1% solid black;
+  background-color:hsla(60, 72%, 55%, 0.37);
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 0%;
+  margin:0%;
+}
+
+.note .conteudo{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.note .descricao{
+  padding: 10px;
+  margin: 0px;
+}
+
+.note .texto{
+  padding: 10px;
+  margin: 10px;
+}
