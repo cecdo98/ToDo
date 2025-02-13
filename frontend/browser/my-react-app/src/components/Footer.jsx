@@ -1,7 +1,9 @@
 function Footer() {
     return(
-        <footer>
-            <p>&copy; {new Date().getFullYear()} Todo lista</p>
+        <footer >
+            <div className="footer">
+                <p>&copy; {new Date().getFullYear()} Todo lista</p>
+            </div>
         </footer>
     )
 }

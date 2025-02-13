@@ -1,0 +1,46 @@
+.button{
+    display: flex;;
+    flex-direction: row;
+    
+    
+  }
+  
+  .buttonEdit{
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  }
+  
+  
+  
+  .buttonEdit:hover{
+    background-color: hsla(60, 83%, 50%, 0.37);
+    cursor: pointer;
+  }
+  
+  .buttonDone{
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  }
+  
+  .buttonDone:hover{
+    background-color: hsla(0, 83%, 50%, 0.37);
+    cursor: pointer;
+  }
+
+  .buttonHeader{
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    border-radius: 20px;
+    transition-duration: 0.4s;
+  }
+
+  .buttonHeader:hover{
+    background-color: hsla(120, 83%, 50%, 0.37);
+    cursor: pointer;
+  }
