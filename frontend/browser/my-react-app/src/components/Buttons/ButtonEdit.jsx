@@ -1,7 +1,6 @@
 function ButtonEdit(){
-
     return(
-        <btn >Editar</btn>
+        <btn>Editar</btn>
     )
 }
 

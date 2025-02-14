@@ -2,7 +2,8 @@ function Header() {
 
     return(
         <header>
-            <h1>ToDo lista</h1>
+            <h1> Tarefas</h1>
+            <hr></hr>
             <nav >
                 <div className="header">
                     <div><btn className="buttonHeader" href="">Nova tarefa </btn></div>

@@ -14,7 +14,7 @@
 
 .note .titulo{
   border: 1% solid black;
-  background-color:hsla(60, 72%, 55%, 0.37);
+  background-color:hsla(0, 72%, 55%, 0.37);
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
   padding: 0%;
   margin:0%;
