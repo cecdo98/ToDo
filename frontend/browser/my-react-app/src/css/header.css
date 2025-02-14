@@ -14,3 +14,9 @@
     height: -3em; 
     margin-top: 40em; 
 }
+
+
+.login{
+    display: flex;
+    flex-direction: column;
+}

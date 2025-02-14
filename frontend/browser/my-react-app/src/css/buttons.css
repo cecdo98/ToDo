@@ -44,3 +44,17 @@
     background-color: hsla(120, 83%, 50%, 0.37);
     cursor: pointer;
   }
+
+  .buttonLogin{
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    border-radius: 20px;
+    transition-duration: 0.4s;
+  }
+
+  .buttonLogin:hover{
+    background-color: hsla(120, 83%, 50%, 0.37);
+    cursor: pointer;
+  }

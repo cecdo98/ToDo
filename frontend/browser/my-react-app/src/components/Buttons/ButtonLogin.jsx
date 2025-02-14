@@ -1,12 +1,20 @@
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+
+
 function ButtonLogin(){
-
     
-
+    const navigate = useNavigate();
+    
+    const handleClick = () => {
+        navigate("/main");
+    }
     return(
-        <btn><a href="">Login</a></btn>
+        
+        <button className="buttonLogin" onClick={handleClick}>Login</button>
     );
 
 }
 
 export default ButtonLogin
-

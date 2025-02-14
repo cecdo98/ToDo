@@ -1,5 +1,5 @@
-import ButtonEdit from "./Buttons/ButtonEdit";
-import ButtonDone from "./Buttons/ButtonDone";
+import ButtonEdit from "./ButtonEdit";
+import ButtonDone from "./ButtonDone";
 import propTypes from "prop-types"
 
 function Note(props){
