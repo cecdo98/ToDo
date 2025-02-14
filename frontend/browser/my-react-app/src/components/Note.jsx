@@ -1,16 +1,17 @@
 import ButtonEdit from "./Buttons/ButtonEdit";
 import ButtonDone from "./Buttons/ButtonDone";
+import propTypes from "prop-types"
 
-function Note(){
+function Note(props){
 
     return(
         <div className="note" >
             <div className="titulo">
-                <h2>Consulta</h2>
+                <h2>{props.titulo}</h2>
             </div>
             <div className="conteudo">
-            <h3 className="descricao">Hospital porto</h3>
-            <p className="texto">Consulta dia 10 de março</p>
+            <h3 className="descricao">{props.descricao}</h3>
+            <p className="texto">{props.texto}</p>
             </div>
             <div className="button">
                 <div className="buttonEdit">
@@ -23,5 +24,13 @@ function Note(){
         </div>
     );
 }
+
+
+Note.propTypes = {
+    titulo: propTypes.string,
+    descricao: propTypes.string,
+    texto: propTypes.string,
+}
+
 
 export default Note
