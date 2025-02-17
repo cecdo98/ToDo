@@ -9,13 +9,12 @@ function RegisterPage() {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost/todo/backend/routers/api.php?action=register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password, name }),
-        });
+        const response = await fetch("http://localhost/todo/backend/routers/api.php?action=register", 
+                        {
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify({ email, password, name }),
+                        });
 
         const data = await response.json();
         setMessage(data.message);
@@ -55,9 +54,16 @@ function RegisterPage() {
                         required 
                     />
             </div>
-                <button className="buttonRegister" type="submit">Registrar</button>
-                {message && <p>{message}</p>}
-            
+            <div className="buttonsLogin">
+                <div>
+                    <button className="buttonRegister" type="submit">Registrar</button>
+                    {message && <p>{message}</p>}
+                </div>
+                <div>
+                    <button className="buttonLogin">Login</button>
+                </div>
+
+            </div>
         </form>
     );
 }

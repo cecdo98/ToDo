@@ -3,11 +3,11 @@
     include_once 'controllers/TaskController.php';
     include_once 'controllers/AuthController.php';
 
-
+ /*
 
     $authcontroller = new AuthController($pdo);
 
-        /*
+       
 
     //criaçao do utilizador
     $email = 'exemplo@exemplo.pt';

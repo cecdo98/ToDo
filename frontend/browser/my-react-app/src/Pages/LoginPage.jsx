@@ -8,7 +8,7 @@ function LoginPage(){
 
     
     return(
-    <body className="loginBody">
+    <div className="loginBody">
         <form className="Mainform" onSubmit={(e) => e.preventDefault()}>
             <div>
                 <h2>Login</h2>
@@ -45,7 +45,7 @@ function LoginPage(){
             </div>
 
         </form>
-    </body>
+    </div>
 
     )
 

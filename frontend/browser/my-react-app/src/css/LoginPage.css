@@ -34,3 +34,8 @@ input {
     outline: none;
     margin: 5px;
 }
+
+.buttonsLogin{
+    display: flex;
+    justify-content: center;
+}

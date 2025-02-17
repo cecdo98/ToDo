@@ -11,11 +11,11 @@ function ButtonLogin({ email, password }){
     const handleLogin = async () => {
         setLoading(true);
 
-    const response = await fectch('http://localhost/backend/routers/api.php', 
+    const response = await fetch('http://localhost/todo/backend/routers/api.php?action=login', 
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, password, action: "login"})
+                        body: JSON.stringify({ email, password})
                     });
 
     const data = await response.json();
