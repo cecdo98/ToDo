@@ -7,6 +7,7 @@
 
     $authcontroller = new AuthController($pdo);
 
+        /*
 
     //criaçao do utilizador
     $email = 'exemplo@exemplo.pt';
@@ -47,4 +48,5 @@
     } else {
         echo "Erro ao criar a tarefa!";
     }
+        */
 ?>

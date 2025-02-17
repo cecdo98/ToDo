@@ -9,29 +9,35 @@
         }
 
         public function login($email, $password){
-            $sql= "SELECT * FROM registos WHERE email = :email AND password = :password";
-
+            $sql= "SELECT * FROM registos WHERE email = :email";
+        
             $stmt = $this->pdo->prepare($sql);
-
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
-
             $stmt->execute();
-
-            return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+        
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            // 🔹 Verifica se o usuário existe e se a senha está correta
+            if ($user && password_verify($password, $user['password'])) {
+                return true; // ✅ Login bem-sucedido
+            }
+        
+            return false; // ❌ Falha no login
         }
 
         public function register($email, $password, $name){
             try{
-                $sql= "INSERT INTO registos(email,utilizador ,password) 
-                VALUES (:email,:utilizador,:password)";
-
+                // 🔹 Criptografar a senha antes de salvar no banco
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        
+                $sql= "INSERT INTO registos(email, utilizador, password) 
+                       VALUES (:email, :utilizador, :password)";
+        
                 $stmt = $this->pdo->prepare($sql);
-
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':utilizador', $name);
-                $stmt->bindParam(':password', $password);
-
+                $stmt->bindParam(':password', $hashedPassword); // 🔹 Armazena a senha criptografada
+        
                 return $stmt->execute(); 
             } catch (PDOException $e) {
                 echo "Erro ao criar o utilizador: " . $e->getMessage();

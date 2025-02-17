@@ -1,26 +1,46 @@
+import { useState } from "react";
 import ButtonLogin from "../components/Buttons/ButtonLogin"
+import ButtonRegister from "../components/Buttons/ButoonRegister";
 
 function LoginPage(){
-    console.log("LoginPage carregada"); 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     
     return(
-        <form className="Mainform">
+        <form className="Mainform" onSubmit={(e) => e.preventDefault()}>
             <div>
                 {/*Imagem */}
             </div>
 
             <div className="container">
                 <div className="login">
-                    <label for="username"><b>Username </b></label>
-                    <input type="text" placeholder="Enter Username" name="username" />
+                    <label htmlFor="email"><b>Email</b></label>
+                        <input type="email" 
+                        placeholder="Enter email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required
+                        />
 
-                    <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" />
+                    <label htmlFor="password"><b>Password</b></label>
+                        <input 
+                            type="password" 
+                            placeholder="Enter Password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
                 </div>
                
-                    <ButtonLogin/>
-                
-                 
+                <div>
+                    <div>
+                        <ButtonLogin email={email} password={password} />
+                    </div>
+                    <div>
+                        <ButtonRegister type="handleRegister" />
+                    </div>
+                </div>
             </div>
 
         </form>
