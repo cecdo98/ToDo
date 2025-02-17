@@ -1,8 +1,4 @@
-.loginBody{
-    background-color: antiquewhite;
-}
-
-.Mainform {
+.registerForm{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,16 +17,13 @@
     border-radius: 20px;
 }
 
-.login{
+
+.register{
     display: flex;
     flex-direction: column;
 }
 
+/*
+    input-> in loginpage.css
+*/
 
-input {
-    border: 1px solid rgb(172, 171, 171);
-    border-radius: 20px;
-    padding: 1vw 1vw;
-    outline: none;
-    margin: 5px;
-}

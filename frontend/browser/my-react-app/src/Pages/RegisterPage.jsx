@@ -22,31 +22,42 @@ function RegisterPage() {
     };
 
     return (
-        <form onSubmit={handleRegister}>
-            <h2>Cadastro</h2>
-            <input 
-                type="text" 
-                placeholder="Nome" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                required 
-            />
-            <input 
-                type="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
-            />
-            <input 
-                type="password" 
-                placeholder="Senha" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
-            />
-            <button type="submit">Registrar</button>
-            {message && <p>{message}</p>}
+        <form className="registerForm" onSubmit={handleRegister}>
+            <div>
+                <h2>Registo</h2>
+            </div>
+
+            <div className="register">
+                <label htmlFor="text"><b>Nome: </b></label>
+                    <input 
+                        type="text" 
+                        placeholder="Nome" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                    />
+
+                <label htmlFor="email"><b>Email: </b></label>
+                    <input 
+                        type="email" 
+                        placeholder="Email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required 
+                    />
+
+                <label htmlFor="password"><b>Password: </b></label>
+                    <input 
+                        type="password" 
+                        placeholder="Senha" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
+                    />
+            </div>
+                <button className="buttonRegister" type="submit">Registrar</button>
+                {message && <p>{message}</p>}
+            
         </form>
     );
 }

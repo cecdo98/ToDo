@@ -8,14 +8,15 @@ function LoginPage(){
 
     
     return(
+    <body className="loginBody">
         <form className="Mainform" onSubmit={(e) => e.preventDefault()}>
             <div>
-                {/*Imagem */}
+                <h2>Login</h2>
             </div>
 
-            <div className="container">
+            <div >
                 <div className="login">
-                    <label htmlFor="email"><b>Email</b></label>
+                    <label htmlFor="email"><b>Email: </b></label>
                         <input type="email" 
                         placeholder="Enter email" 
                         value={email} 
@@ -33,7 +34,7 @@ function LoginPage(){
                         />
                 </div>
                
-                <div>
+                <div className="buttonsLogin">
                     <div>
                         <ButtonLogin email={email} password={password} />
                     </div>
@@ -44,6 +45,7 @@ function LoginPage(){
             </div>
 
         </form>
+    </body>
 
     )
 
