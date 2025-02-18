@@ -14,15 +14,15 @@ $authController = new AuthController($pdo);
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET' && isset($_GET['id'])) {
-    // 🔹 Buscar uma tarefa específica
+    // Procura tarefa específica
     echo json_encode($taskController->getTaskById($_GET['id']));
 
 } elseif ($method === 'GET') {
-    // 🔹 Buscar todas as tarefas
+    // todas as tarefas
     echo json_encode($taskController->getTasks());
 
 } elseif ($method === 'POST') {
-    // 🔹 Lendo os dados enviados pelo frontend
+    // Dados enviados pelo frontend
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (isset($_GET['action'])) {

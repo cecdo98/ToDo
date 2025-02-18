@@ -12,7 +12,7 @@ function Note({Notes}){
                 </div>
                 <div className="conteudo">
                     <h3 className="descricao">{note.descricao}</h3>
-                    <p className="texto">{note.texto}</p>
+                    <p className="tarefa">{note.tarefa}</p>
                 </div>
                 <div className="button">
                     <div className="buttonEdit">
