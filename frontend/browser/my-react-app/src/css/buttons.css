@@ -46,7 +46,7 @@
     background-color: hsla(120, 83%, 50%, 0.37);
     cursor: pointer;
   }
-
+  /*
   .buttonLogin{
     padding: 20px;
     margin: 10px;
@@ -61,6 +61,45 @@
     cursor: pointer;
   }
 
+  */
+  .buttonLogin{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .buttonLogin:hover{
+    background: #7a7878;
+  }
+
+  .buttonRegister{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .buttonRegister:hover{
+    background: #7a7878;
+  }
+  /*
   .buttonRegister{
     padding: 20px;
     margin: 10px;
@@ -74,3 +113,5 @@
     background-color: hsla(120, 83%, 50%, 0.37);
     cursor: pointer;
   }
+
+  */

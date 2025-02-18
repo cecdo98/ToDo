@@ -9,42 +9,45 @@ function LoginPage(){
     
     return(
     <div className="loginBody">
-        <form className="Mainform" onSubmit={(e) => e.preventDefault()}>
-            <div>
-                <h2>Login</h2>
-            </div>
-
-            <div >
+        <div className="Mainform">
+            <form  onSubmit={(e) => e.preventDefault()}>
+                    <h1>Login</h1>
                 <div className="login">
-                    <label htmlFor="email"><b>Email: </b></label>
                         <input type="email" 
                         placeholder="Enter email" 
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)} 
                         required
                         />
-
-                    <label htmlFor="password"><b>Password</b></label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div className="login">
                         <input 
-                            type="password" 
-                            placeholder="Enter Password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
+                        type="password" 
+                        placeholder="Enter Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
                         />
+                    <i class='bx bxs-lock-alt' ></i>
                 </div>
-               
-                <div className="buttonsLogin">
-                    <div>
-                        <ButtonLogin email={email} password={password} />
-                    </div>
-                    <div>
-                        <ButtonRegister type="handleRegister" />
-                    </div>
+                <div className="remember">
+                    <label>
+                        <input 
+                        type="checkbox"/> Remember me </label>
+                        <a href="">Forget password?</a>
                 </div>
-            </div>
 
-        </form>
+                    <div className="buttonsOfLogin">
+                        <div>
+                            <ButtonLogin email={email} password={password} />
+                        </div>
+                        <div>
+                            <ButtonRegister type="handleRegister" />
+                        </div>
+                    </div>
+            </form>
+        </div>
     </div>
 
     )
