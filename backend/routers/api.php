@@ -34,7 +34,7 @@ if ($method === 'GET' && isset($_GET['id'])) {
                 }
 
                 $success = $authController->register($data['email'], $data['password'], $data['name']);
-                echo json_encode(["success" => $success, "message" => $success ? "Usuário criado com sucesso!" : "Erro ao criar usuário"]);
+                echo json_encode(["success" => $success, "message" => $success ? "Utilizador criado com sucesso!" : "Erro ao criar usuário"]);
                 break;
 
             case 'login':

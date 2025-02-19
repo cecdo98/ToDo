@@ -1,29 +1,66 @@
-.registerForm{
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Popping", sans-serif;
+}
+
+.RegisterBody{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("E:\XAMPP\htdocs\ToDo\frontend\browser\my-react-app\src\assets\Particles-Rain-Background.webp") no-repeat;
+    background-size: cover;
+    background-position: center ;
+}
+
+.RegisterForm{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255,.2);
+    backdrop-filter: blur(10px);
+    box-shadow:  0 0 10px rgba(0, 0, 0,.2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.RegisterForm h1{
+    font-size: 36px;
     text-align: center;
+}
 
+.RegisterForm .register{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.register input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255,.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.register input::placeholder{
+    color: #fff;
+}
+
+.register i{
     position: absolute;
+    right: 20px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 30vw;
-    padding: 20px;
-    background-color: rgb(207, 250, 194);
-    border: 1px solid black;
-    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
-    border-radius: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
 }
-
-
-.register{
-    display: flex;
-    flex-direction: column;
-}
-
-/*
-    input-> in loginpage.css
-*/
 
