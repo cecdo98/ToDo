@@ -19,13 +19,13 @@ ________________________________________
 
 2️⃣ Desenvolver o Frontend Web com React.js
 
-Criar um projeto React.js (usar Vite para mais performance).
-Configurar React Router para navegação entre páginas (lista de tarefas, login, etc.).
+✅ Criar um projeto React.js (usar Vite para mais performance).
+🟡 Configurar React Router para navegação entre páginas (lista de tarefas, login, etc.).
 Criar componentes para exibir e gerenciar tarefas.
-Fazer chamadas à API PHP usando fetch ou Axios.
-Criar autenticação (login/logout) armazenando o token/localStorage.
+🟡 Fazer chamadas à API PHP usando fetch ou Axios.
+🟡 Criar autenticação (login/logout) armazenando o token/localStorage.
 Estilizar o projeto (podes usar Tailwind CSS ou Material UI).
-Testar o frontend no navegador com o backend rodando no XAMPP.
+🟡 Testar o frontend no navegador com o backend rodando no XAMPP.
 ________________________________________
 
 3️⃣ Criar a Versão Desktop com Electron.js

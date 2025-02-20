@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ButtonLogin from "../components/Buttons/ButtonLogin"
-import ButtonRegister from "../components/Buttons/ButtonRegister";
+import ButtonLogin from "../components/Login_Register/ButtonLogin"
+import ButtonRegister from "../components/Login_Register/ButtonRegister";
 
 function LoginPage(){
     const [email, setEmail] = useState("");

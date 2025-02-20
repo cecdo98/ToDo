@@ -23,7 +23,7 @@ function ButtonLogin({ email, password }){
 
     if(data.success) {
         alert("Login bem-sucedido!");
-        navigate("/main");
+        navigate("/main", {state:{email}});
     } else{
         alert("Email ou senha incorrreto!");
     }

@@ -37,12 +37,12 @@
             }
         }
 
-        public function getTaskById($id) {
-            $sql = "SELECT * FROM entradas WHERE id = :id";
+        public function getTaskByEmail($email) {
+            $sql = "SELECT * FROM entradas WHERE email = :email";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':email', $email);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
         public function deleteTask($id) {

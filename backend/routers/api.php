@@ -13,9 +13,9 @@ $authController = new AuthController($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-if ($method === 'GET' && isset($_GET['id'])) {
+if ($method === 'GET' && isset($_GET['email'])) {
     // Procura tarefa específica
-    echo json_encode($taskController->getTaskById($_GET['id']));
+    echo json_encode($taskController->getTaskByEmail($_GET['email']));
 
 } elseif ($method === 'GET') {
     // todas as tarefas
