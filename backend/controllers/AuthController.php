@@ -16,18 +16,38 @@
             $stmt->execute();
         
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-            // 🔹 Verifica se o usuário existe e se a senha está correta
+
             if ($user && password_verify($password, $user['password'])) {
-                return true; // ✅ Login bem-sucedido
+                return $user; 
             }
         
-            return false; // ❌ Falha no login
+            return false; 
+        }
+
+        public function getUserByEmail($email) {
+            $sql = "SELECT utilizador FROM registos WHERE email = :email";
+            
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result) {
+                return [
+                    "success" => true,
+                    "user" => $result['utilizador']
+                ];
+            }
+            
+            return [
+                "success" => false,
+                "message" => "Usuário não encontrado"
+            ];
         }
 
         public function register($email, $password, $name){
             try{
-                // 🔹 Criptografar a senha antes de salvar no banco
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
                 $sql= "INSERT INTO registos(email, utilizador, password) 
@@ -36,7 +56,7 @@
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':utilizador', $name);
-                $stmt->bindParam(':password', $hashedPassword); // 🔹 Armazena a senha criptografada
+                $stmt->bindParam(':password', $hashedPassword); 
         
                 return $stmt->execute(); 
             } catch (PDOException $e) {

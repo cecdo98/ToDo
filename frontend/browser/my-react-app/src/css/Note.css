@@ -1,4 +1,6 @@
 
+
+
 .note{
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 1px;
@@ -35,4 +37,8 @@
 }
 
 
+.button{
+  display: flex;
+  justify-content: center;
+}
 

@@ -14,18 +14,22 @@ $authController = new AuthController($pdo);
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET' && isset($_GET['email'])) {
-    // Procura tarefa específica
-    echo json_encode($taskController->getTaskByEmail($_GET['email']));
+    if (isset($_GET['action']) && $_GET['action'] === 'get_user') {  
+        $user = $authController->getUserByEmail($_GET['email']);
+        echo json_encode($user);
+        
+    } else {
+        echo json_encode($taskController->getTaskByEmail($_GET['email']));
+    }
 
 } elseif ($method === 'GET') {
-    // todas as tarefas
     echo json_encode($taskController->getTasks());
 
 } elseif ($method === 'POST') {
-    // Dados enviados pelo frontend
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (isset($_GET['action'])) {
+
         switch ($_GET['action']) {
             case 'register':
                 if (!isset($data['email'], $data['password'], $data['name'])) {
@@ -55,6 +59,16 @@ if ($method === 'GET' && isset($_GET['email'])) {
 
                 $success = $taskController->create($data['descricao'], $data['tarefa'], $data['categoria'], $data['email']);
                 echo json_encode(["success" => $success, "message" => $success ? "Tarefa criada com sucesso!" : "Erro ao criar tarefa"]);
+                break;
+
+            case 'edit_task':
+                if (!isset($data['id'], $data['titulo'], $data['descricao'], $data['tarefa'])) {
+                    echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
+                    exit;
+                }
+
+                $success = $taskController->updateTask($data['id'], $data['titulo'], $data['descricao'], $data['tarefa']);
+                echo json_encode(["success" => $success, "message" => $success ? "Tarefa editada com sucesso!" : "Erro ao editar tarefa"]);
                 break;
 
             default:

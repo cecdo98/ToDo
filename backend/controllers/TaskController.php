@@ -57,6 +57,13 @@
                 return ["success" => false, "message" => "Erro ao apagar a tarefa: " . $e->getMessage()];
             }
         }
+
+        public function updateTask($id, $titulo, $descricao, $tarefa) {
+            $sql = "UPDATE entradas SET titulo = ?, descricao = ?, tarefa = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([$titulo, $descricao, $tarefa, $id]);
+        }
+        
         
     }
 ?>
