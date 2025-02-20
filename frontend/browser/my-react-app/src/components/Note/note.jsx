@@ -107,8 +107,8 @@ function Note({ email }) {
                             onChange={(e) => setEditNoteData({ ...editNoteData, tarefa: e.target.value })}
                             placeholder="Tarefa"
                         />
-                        <button onClick={saveNote}>Salvar</button>
-                        <button onClick={() => setEditModalOpen(false)}>Cancelar</button>
+                        <button className="buttonSave" onClick={saveNote}>Salvar</button>
+                        <button  className="buttonCancel" onClick={() => setEditModalOpen(false)}>Cancelar</button>
                     </div>
                 </div>
             )}

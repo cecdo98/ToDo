@@ -13,7 +13,7 @@ $authController = new AuthController($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-if ($method === 'GET' && isset($_GET['email'])) {
+if ($method === 'GET' && isset($_GET['email'])) {   //o metodo get nao é seguro mudar para post
     if (isset($_GET['action']) && $_GET['action'] === 'get_user') {  
         $user = $authController->getUserByEmail($_GET['email']);
         echo json_encode($user);
