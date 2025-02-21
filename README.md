@@ -1,6 +1,6 @@
 Todo List App
 
-## English 🇬🇧
+## English EN
 ### Description
 This is a simple **Todo List** web application that allows users to register, log in, and manage tasks. The frontend is built with React, and the backend is developed using PHP with a MySQL database.
 
@@ -19,7 +19,7 @@ cd todo-app
 #### 2. Backend Setup
 - Navigate to the `backend` folder
 - Configure the database in `config/db.php`
-- Import the `database.sql` file into your MySQL database
+- Import the `todo_list.sql` file into your MySQL database
 - Start a local PHP server:
 ```sh
 php -S localhost:8000 -t backend
@@ -67,7 +67,7 @@ cd todo-app
 #### 2. Configuração do Backend
 - Acesse a pasta `backend`
 - Configure a base de dados no ficheiro `config/db.php`
-- Importe o ficheiro `database.sql` para a sua base de dados MySQL
+- Importe o ficheiro `todo_list.sql` para a sua base de dados MySQL
 - Inicie o servidor local PHP:
 ```sh
 php -S localhost:8000 -t backend
