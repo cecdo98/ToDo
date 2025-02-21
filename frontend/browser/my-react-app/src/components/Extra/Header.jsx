@@ -1,4 +1,8 @@
-function Header() {
+import ButtonNewTask from "../Note/ButtonNewTask"
+import ButtonOptions from "../Note/ButtonOptions";
+
+
+function Header({email, token}){
 
     return(
         <header>
@@ -6,8 +10,13 @@ function Header() {
             <hr></hr>
             <nav >
                 <div className="header">
-                    <div><btn className="buttonHeader" href="">Nova tarefa </btn></div>
-                    <div><btn className="buttonHeader" href=""> Definições</btn></div>
+                    <div>
+                        < ButtonNewTask email={email} token={token} />
+                    </div>
+
+                    <div>
+                        < ButtonOptions />
+                    </div>
                 </div>
             </nav>
         </header>
@@ -15,3 +24,7 @@ function Header() {
 }
 
 export default Header
+
+
+
+

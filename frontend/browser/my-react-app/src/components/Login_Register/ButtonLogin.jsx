@@ -27,34 +27,33 @@ function ButtonLogin({ email, password }){
     
     const handleLogin = async () => {
         setLoading(true);
-
-        const response = await fetch('http://localhost/todo/backend/routers/api.php?action=login', 
-                        {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ email, password})
-                        });
-
+    
+        const response = await fetch('http://localhost/todo/backend/routers/api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: "login", email, password })
+        });
+    
         const data = await response.json();
         setLoading(false);
-
-        if(data.success) {
+    
+        if (data.success) {
             alert("Login bem-sucedido!");
             navigate("/main", { 
                 state: { 
                     email: email,
-                    user: user 
+                    token: data.token 
                 }
             });
-        } else{
-            alert("Email ou senha incorrreto!");
+        } else {
+            alert("Email ou senha incorretos!");
         }
-    }
+    };
 
     return(
         
         <button className="buttonLogin" onClick={handleLogin} disabled={loading}>
-            {loading ? "Entrando..." : "Login"}
+            {loading ? "loading..." : "Login"}
         </button>
     );
 

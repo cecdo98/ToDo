@@ -1,8 +1,6 @@
-import ButtonEdit from "./ButtonEdit";
-import ButtonDone from "./ButtonDone";
 import { useState, useEffect } from "react";
 
-function Note({ email }) {
+function Note({ email, token }) {
     const [notes, setNotes] = useState([]);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editNoteData, setEditNoteData] = useState({ id: null, titulo: "", descricao: "", tarefa: "" });
@@ -10,18 +8,41 @@ function Note({ email }) {
     
     useEffect(() => {
         const fetchTasks = async () => {
-            if (email === "Email não recebido") return;
+            if (!email || email === "Email não recebido") return;
+    
             try {
-                const response = await fetch(`http://localhost/todo/backend/routers/api.php?email=${email}`);
+                const response = await fetch(`http://localhost/todo/backend/routers/api.php`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`
+                     },
+                    body: JSON.stringify({ 
+                        action: "get_tasks",
+                        email: email 
+                    }),
+                });
+    
                 const data = await response.json();
-                setNotes(data);
+
+    
+                // Se os dados vierem em uma propriedade específica do objeto
+                if (data.success && Array.isArray(data.tasks)) {
+                    setNotes(data.tasks);
+                } else if (Array.isArray(data)) {
+                    setNotes(data);
+                } else {
+                    setNotes([]);
+                    console.error("Estrutura da resposta:", data);
+                }
             } catch (error) {
                 console.error("Erro ao buscar tarefas:", error);
+                setNotes([]);
             }
         };
+    
 
         fetchTasks();
-    }, [email]);
+    }, [email, token]);
 
     
     function editNote(note) {
@@ -33,7 +54,9 @@ function Note({ email }) {
         try {
             const response = await fetch(`http://localhost/todo/backend/routers/api.php?action=edit_task`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                         },
                 body: JSON.stringify({
                     id: editNoteData.id,
                     titulo: editNoteData.titulo,
@@ -55,7 +78,27 @@ function Note({ email }) {
         }
     }
     
-    
+    async function deleteNote(id) {
+        try {
+            const response = await fetch(`http://localhost/todo/backend/routers/api.php`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}` 
+                        },
+                body: JSON.stringify({ id })
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                setNotes(notes.filter(note => note.id !== id));
+            } else {
+                console.error("Erro ao deletar a nota:", result.message);
+            }
+        } catch (error) {
+            console.error("Erro ao deletar nota:", error);
+        }
+    }
+
 
     return (
         <div className="BodyNote">
@@ -107,7 +150,7 @@ function Note({ email }) {
                             onChange={(e) => setEditNoteData({ ...editNoteData, tarefa: e.target.value })}
                             placeholder="Tarefa"
                         />
-                        <button className="buttonSave" onClick={saveNote}>Salvar</button>
+                        <button className="buttonSave" onClick={saveNote}>Guardar</button>
                         <button  className="buttonCancel" onClick={() => setEditModalOpen(false)}>Cancelar</button>
                     </div>
                 </div>

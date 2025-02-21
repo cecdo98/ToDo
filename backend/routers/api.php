@@ -1,13 +1,13 @@
 <?php
-header("Access-Control-Allow-Origin: *");  //Origin: url
-header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Origin: *");  // Origin pode ser restrito ao frontend em produção
+header("Access-Control-Allow-Methods: POST, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
 
 include_once __DIR__ . '/../config/db.php';
 include_once __DIR__ . '/../controllers/TaskController.php';
 include_once __DIR__ . '/../controllers/AuthController.php';
-include_once __DIR__ .'/../controllers/JwtAuth.php';
+include_once __DIR__ . '/../controllers/JwtAuth.php';
 
 // Obtém o corpo do request JSON
 $data = json_decode(file_get_contents("php://input"), true);
@@ -24,83 +24,103 @@ $authController = new AuthController($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-if ($method === 'GET' && isset($_GET['email'])) {   //o metodo get nao é seguro mudar para post
-    if (isset($_GET['action']) && $_GET['action'] === 'get_user') {  
-        $user = $authController->getUserByEmail($_GET['email']);
-        echo json_encode($user);
-        
-    } else {
-        echo json_encode($taskController->getTaskByEmail($_GET['email']));
-    }
+if ($method === 'POST') {
+    // Lê o "action" do corpo JSON
+    $action = $data['action'] ?? '';
 
-} elseif ($method === 'GET') {
-    echo json_encode($taskController->getTasks());
+    switch ($action) {
+        case 'register':
+            if (!isset($data['email'], $data['password'], $data['name'])) {
+                echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
+                exit;
+            }
 
-} elseif ($method === 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
+            $response = $authController->register($data['email'], $data['password'], $data['name']);
+            echo json_encode($response);
+            break;
 
-    if (isset($_GET['action'])) {
+        case 'login':
+            if (!isset($data['email'], $data['password'])) {
+                echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
+                exit;
+            }
 
-        switch ($_GET['action']) {
-            case 'register':
-                if (!isset($data['email'], $data['password'], $data['name'])) {
-                    echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
-                    exit;
-                }
-            
-                // Recebe a resposta do método register que retorna um array com 'success' e 'message'
-                $response = $authController->register($data['email'], $data['password'], $data['name']);
-                
-                // Retorna a resposta recebida do AuthController (já com a mensagem e o sucesso)
-                echo json_encode($response);
-                break;
-            
-            
+            $success = $authController->login($data['email'], $data['password']);
+            if ($success) {
+                $token = JwtAuth::generateToken($data['email']);
+                echo json_encode(["success" => true, "message" => "Login bem-sucedido!", "token" => $token]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Credenciais inválidas"]);
+            }
+            break;
 
-            case 'login':
-                if (!isset($data['email'], $data['password'])) {
-                    echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
-                    exit;
-                }
+        case 'get_tasks':
+            if (!$userEmail) {
+                echo json_encode(["success" => false, "message" => "Token inválido ou não fornecido"]);
+                exit;
+            }
 
-                $success = $authController->login($data['email'], $data['password']);
-                echo json_encode(["success" => $success, "message" => $success ? "Login bem-sucedido!" : "Credenciais inválidas"]);
-                break;
+            $tasks = $taskController->getTaskByEmail($userEmail);
+            echo json_encode([
+                "success" => true,
+                "tasks" => $tasks
+            ]);
+            break;
 
-            case 'create_task':
-                if (!isset($data['descricao'], $data['tarefa'], $data['categoria'], $data['email'])) {
-                    echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
-                    exit;
-                }
+        case 'create_task':
+            header('Content-Type: application/json');
+            ob_clean();
+            $data = json_decode(file_get_contents('php://input'), true);
 
-                $success = $taskController->create($data['descricao'], $data['tarefa'], $data['categoria'], $data['email']);
-                echo json_encode(["success" => $success, "message" => $success ? "Tarefa criada com sucesso!" : "Erro ao criar tarefa"]);
-                break;
+            if (!isset($data['titulo'], $data['descricao'], $data['tarefa'], $data['email'])) {
+                echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
+                exit;
+            }
 
-            case 'edit_task':
-                if (!isset($data['id'], $data['titulo'], $data['descricao'], $data['tarefa'])) {
-                    echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
-                    exit;
-                }
 
-                $success = $taskController->updateTask($data['id'], $data['titulo'], $data['descricao'], $data['tarefa']);
-                echo json_encode(["success" => $success, "message" => $success ? "Tarefa editada com sucesso!" : "Erro ao editar tarefa"]);
-                break;
+            $success = $taskController->create($data['titulo'], $data['descricao'], $data['tarefa'], $data['email']);
+            echo json_encode(["success" => $success, "message" => $success ? "Tarefa criada com sucesso!" : "Erro ao criar tarefa"]);
+            break;
 
-            default:
-                echo json_encode(["success" => false, "message" => "Ação inválida"]);
-                break;
-        }
+        case 'edit_task':
+            if (!isset($data['id'], $data['titulo'], $data['descricao'], $data['tarefa'])) {
+                echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
+                exit;
+            }
+
+            $success = $taskController->updateTask($data['id'], $data['titulo'], $data['descricao'], $data['tarefa']);
+            echo json_encode(["success" => $success, "message" => $success ? "Tarefa editada com sucesso!" : "Erro ao editar tarefa"]);
+            break;
+
+        case 'get_user':
+            if (!isset($data['email'])) {
+                echo json_encode(["success" => false, "message" => "Email não fornecido"]);
+                exit;
+            }
+
+            $user = $authController->getUserByEmail($data['email']);
+
+            if (!$user || !is_array($user)) {
+                echo json_encode([]); 
+            } else {
+                echo json_encode($user);
+            }
+            break;;
+
+        default:
+            echo json_encode(["success" => false, "message" => "Ação inválida"]);
+            break;
     }
 
 } elseif ($method === 'DELETE') {
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    if (isset($data['id'])) {
-        echo json_encode($taskController->deleteTask($data['id']));
-    } else {
+    if (!isset($data['id'])) {
         echo json_encode(["success" => false, "message" => "ID não fornecido"]);
+        exit;
     }
+
+    $success = $taskController->deleteTask($data['id']);
+    echo json_encode(["success" => $success, "message" => $success ? "Tarefa excluída!" : "Erro ao excluir tarefa"]);
+
 } else {
     echo json_encode(["message" => "Método não suportado"]);
 }

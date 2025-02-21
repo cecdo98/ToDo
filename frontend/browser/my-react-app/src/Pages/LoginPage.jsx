@@ -14,7 +14,7 @@ function LoginPage(){
                     <h1>Login</h1>
                 <div className="login">
                         <input type="email" 
-                        placeholder="Enter email" 
+                        placeholder="Email" 
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)} 
                         required
@@ -24,7 +24,7 @@ function LoginPage(){
                 <div className="login">
                         <input 
                         type="password" 
-                        placeholder="Enter Password" 
+                        placeholder="Password" 
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
                         required 

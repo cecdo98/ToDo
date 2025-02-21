@@ -7,16 +7,16 @@
         }
 
 
-        public function create($descricao, $tarefa, $categoria, $email) {
+        public function create($titulo, $descricao, $tarefa, $email) {
             try {
-                $sql = "INSERT INTO entradas (descricao, tarefa, categoria,email) 
-                        VALUES (:descricao, :tarefa, :categoria, :email)";
+                $sql = "INSERT INTO entradas (titulo,descricao, tarefa,email) 
+                        VALUES (:titulo, :descricao, :tarefa, :email)";
 
                 $stmt = $this->pdo->prepare($sql);
 
+                $stmt->bindParam(':titulo', $titulo);
                 $stmt->bindParam(':descricao', $descricao);
                 $stmt->bindParam(':tarefa', $tarefa);
-                $stmt->bindParam(':categoria', $categoria);
                 $stmt->bindParam(':email', $email);
 
                 return $stmt->execute(); 
@@ -38,10 +38,8 @@
         }
 
         public function getTaskByEmail($email) {
-            $sql = "SELECT * FROM entradas WHERE email = :email";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
+            $stmt = $this->pdo->prepare("SELECT * FROM entradas WHERE email = ?");
+            $stmt->execute([$email]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
