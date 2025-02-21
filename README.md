@@ -87,7 +87,7 @@ npm run dev
 ### Como Usar
 1. Abra a aplicação no navegador (`http://localhost:5173`)
 2. Registe um novo utilizador
-3. Faça login e gerencie as suas tarefas
+3. Faça login e controle as suas tarefas
 
 ### Rotas da API
 - `POST /api.php` - Lida com autenticação e gestão de tarefas
