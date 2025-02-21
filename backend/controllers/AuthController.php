@@ -46,25 +46,48 @@
             ];
         }
 
-        public function register($email, $password, $name){
-            try{
+        public function register($email, $password, $name) {
+            try {
+                // Verifica se o e-mail já está em uso
+                $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM registos WHERE email = :email");
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+                $count = $stmt->fetchColumn();
+        
+                if ($count > 0) {
+                    // Se o e-mail já existe, retorna false e uma mensagem específica
+                    return [
+                        "success" => false,
+                        "message" => "Este email já está em uso"
+                    ];
+                }
+        
+                // Caso contrário, cria o utilizador
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
-                $sql= "INSERT INTO registos(email, utilizador, password) 
-                       VALUES (:email, :utilizador, :password)";
+                $sql = "INSERT INTO registos(email, utilizador, password) 
+                        VALUES (:email, :utilizador, :password)";
         
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':utilizador', $name);
-                $stmt->bindParam(':password', $hashedPassword); 
+                $stmt->bindParam(':password', $hashedPassword);
         
-                return $stmt->execute(); 
+                $success = $stmt->execute();
+        
+                // Se o registo for bem-sucedido, retorna true com uma mensagem de sucesso
+                return [
+                    "success" => $success,
+                    "message" => $success ? "Utilizador criado com sucesso!" : "Erro ao criar utilizador"
+                ];
             } catch (PDOException $e) {
-                echo "Erro ao criar o utilizador: " . $e->getMessage();
-                return false;
+                return [
+                    "success" => false,
+                    "message" => "Erro ao criar utilizador: " . $e->getMessage()
+                ];
             }
         }
-    }
-
+        
+}
 
 ?>

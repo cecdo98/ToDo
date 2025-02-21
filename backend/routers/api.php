@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *");  //Origin: url
 header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
@@ -7,6 +7,17 @@ header("Content-Type: application/json");
 include_once __DIR__ . '/../config/db.php';
 include_once __DIR__ . '/../controllers/TaskController.php';
 include_once __DIR__ . '/../controllers/AuthController.php';
+include_once __DIR__ .'/../controllers/JwtAuth.php';
+
+// Obtém o corpo do request JSON
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Obtém o token do Header
+$headers = getallheaders();
+$token = isset($headers['Authorization']) ? str_replace('Bearer ', '', $headers['Authorization']) : '';
+
+// Valida Token se necessário
+$userEmail = JwtAuth::verifyToken($token);
 
 $taskController = new TaskController($pdo);
 $authController = new AuthController($pdo);
@@ -36,10 +47,15 @@ if ($method === 'GET' && isset($_GET['email'])) {   //o metodo get nao é seguro
                     echo json_encode(["success" => false, "message" => "Parâmetros inválidos"]);
                     exit;
                 }
-
-                $success = $authController->register($data['email'], $data['password'], $data['name']);
-                echo json_encode(["success" => $success, "message" => $success ? "Utilizador criado com sucesso!" : "Erro ao criar usuário"]);
+            
+                // Recebe a resposta do método register que retorna um array com 'success' e 'message'
+                $response = $authController->register($data['email'], $data['password'], $data['name']);
+                
+                // Retorna a resposta recebida do AuthController (já com a mensagem e o sucesso)
+                echo json_encode($response);
                 break;
+            
+            
 
             case 'login':
                 if (!isset($data['email'], $data['password'])) {
