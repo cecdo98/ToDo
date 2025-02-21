@@ -1,8 +1,11 @@
 import ButtonNewTask from "../Note/ButtonNewTask"
 import ButtonOptions from "../Note/ButtonOptions";
+import ButtonLogout from "../Note/ButtonLogout";
 
 
 function Header({email, token}){
+
+    
 
     return(
         <header>
@@ -13,7 +16,10 @@ function Header({email, token}){
                     <div>
                         < ButtonNewTask email={email} token={token} />
                     </div>
-
+                    <div>
+                        < ButtonLogout token={token}/>
+                    </div>
+                    
                     <div>
                         < ButtonOptions />
                     </div>
