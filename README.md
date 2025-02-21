@@ -1,6 +1,6 @@
 Todo List App
 
-## English 🇬🇧
+## English EN
 ### Description
 This is a simple **Todo List** web application that allows users to register, log in, and manage tasks. The frontend is built with React, and the backend is developed using PHP with a MySQL database.
 
