@@ -42,15 +42,11 @@ function MainPage(){
     fetchUser();
     }, [email]);
     
-    function capitalizeFirstLetter(val) {
-        return String(val).charAt(0).toUpperCase() + String(val).slice(1);
-    }
 
 
   return(
       <>
-        <Header email={email} token={token} />
-        <h2>Bem-vindo, {capitalizeFirstLetter(user)}</h2>
+        <Header email={email} token={token}  user={user}/>
         <Note email={email} token={token} />  
         <Footer/>
       </>

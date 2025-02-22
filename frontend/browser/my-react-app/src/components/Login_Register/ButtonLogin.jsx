@@ -38,7 +38,6 @@ function ButtonLogin({ email, password }){
         setLoading(false);
     
         if (data.success) {
-            alert("Login bem-sucedido!");
             navigate("/main", { 
                 state: { 
                     email: email,

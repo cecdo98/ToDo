@@ -12,7 +12,10 @@ function ButtonLogout({token}) {
     }
 
     return(
-        <button className="buttonHeader" onClick={handleLogout}>Logout</button>
+        <button className="buttonHeader" 
+            onClick={handleLogout}>
+            <i class='bx bxs-log-out'></i>
+        </button>
     )
 }
 

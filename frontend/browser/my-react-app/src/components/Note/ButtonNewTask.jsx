@@ -54,33 +54,35 @@ function ButtonNewTask({ email, token }) {
             </button>
 
             {newModeOpen && (
-                <div>
-                    <h2>Nova tarefa:</h2>
-                    <form onSubmit={addTasks}>
-                        <input
-                            type="text"
-                            placeholder="Título"
-                            value={newNoteData.titulo}
-                            onChange={(e) => setNewNoteData({ ...newNoteData, titulo: e.target.value })}
-                        />
+                <div className="modalOverlay">
+                    <div className="modalContent">
+                        <h2>Nova tarefa:</h2>
+                        <form onSubmit={addTasks}>
+                            <input
+                                type="text"
+                                placeholder="Título"
+                                value={newNoteData.titulo}
+                                onChange={(e) => setNewNoteData({ ...newNoteData, titulo: e.target.value })}
+                            />
 
-                        <input
-                            type="text"
-                            placeholder="Descrição"
-                            value={newNoteData.descricao}
-                            onChange={(e) => setNewNoteData({ ...newNoteData, descricao: e.target.value })}
-                        />
+                            <input
+                                type="text"
+                                placeholder="Descrição"
+                                value={newNoteData.descricao}
+                                onChange={(e) => setNewNoteData({ ...newNoteData, descricao: e.target.value })}
+                            />
 
-                        <input
-                            type="text"
-                            placeholder="Tarefa"
-                            value={newNoteData.tarefa}
-                            onChange={(e) => setNewNoteData({ ...newNoteData, tarefa: e.target.value })}
-                        />
+                            <input
+                                type="text"
+                                placeholder="Tarefa"
+                                value={newNoteData.tarefa}
+                                onChange={(e) => setNewNoteData({ ...newNoteData, tarefa: e.target.value })}
+                            />
 
-                        <button type="submit">Guardar</button>
-                        <button type="button" onClick={() => setNewModeOpen(false)}>Cancelar</button>
-                    </form>
+                            <button type="submit">Guardar</button>
+                            <button type="button" onClick={() => setNewModeOpen(false)}>Cancelar</button>
+                        </form>
+                    </div>
                 </div>
             )}
         </>

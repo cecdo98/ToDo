@@ -3,28 +3,29 @@ import ButtonOptions from "../Note/ButtonOptions";
 import ButtonLogout from "../Note/ButtonLogout";
 
 
-function Header({email, token}){
+function Header({email, token, user}){
 
-    
+    function capitalizeFirstLetter(val) {
+        return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+    }
 
     return(
         <header>
-            <h1> Tarefas</h1>
-            <hr></hr>
-            <nav >
-                <div className="header">
-                    <div>
+            <nav className="headerBar">
+                <div className="headerText">
+                    <h1>Bem-vindo, {capitalizeFirstLetter(user)}</h1>
+                </div>
+                <div className="headerButton">
+                    <lu className="headertask">
                         < ButtonNewTask email={email} token={token} />
-                    </div>
-                    <div>
+                    </lu>
+
+                    <lu className="headerLogger">
                         < ButtonLogout token={token}/>
-                    </div>
-                    
-                    <div>
-                        < ButtonOptions />
-                    </div>
+                    </lu>
                 </div>
             </nav>
+            <hr></hr>
         </header>
     );
 }
