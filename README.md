@@ -1,13 +1,19 @@
 Todo List App
 
-## English EN
+## English US
 ### Description
 This is a simple **Todo List** web application that allows users to register, log in, and manage tasks. The frontend is built with React, and the backend is developed using PHP with a MySQL database.
+
 
 ### Features
 - User registration and authentication (JWT-based login system)
 - Add, edit, and delete tasks
 - Secure API with token-based authentication
+
+### Requirements
+- Node.js and npm installed
+- PHP 7+ installed
+- MySQL database (using **XAMPP**, **NGINX**, or another local server)
 
 ### Installation
 #### 1. Clone the Repository
@@ -17,9 +23,11 @@ cd todo-app
 ```
 
 #### 2. Backend Setup
-- Navigate to the `backend` folder
-- Configure the database in `config/db.php`
-- Import the `todo_list.sql` file into your MySQL database
+- Install a local server like XAMPP or NGINX to run MySQL.
+- Start MySQL and Apache (if using XAMPP).
+- Navigate to the backend folder.
+- Configure the database connection in config/db.php.
+- Import the todo_list.sql file into your MySQL database.
 - Start a local PHP server:
 ```sh
 php -S localhost:8000 -t backend
@@ -57,6 +65,11 @@ Esta é uma aplicação web **Lista de Tarefas** que permite aos utilizadores re
 - Adicionar, editar e eliminar tarefas
 - API segura com autenticação baseada em tokens
 
+### Requisitos
+- Node.js e npm instalados.
+- PHP 7+ instalado.
+- Base de dados MySQL (utilizando XAMPP, NGINX ou outro servidor local).
+
 ### Instalação
 #### 1. Clonar o Repositório
 ```sh
@@ -65,29 +78,31 @@ cd todo-app
 ```
 
 #### 2. Configuração do Backend
-- Acesse a pasta `backend`
-- Configure a base de dados no ficheiro `config/db.php`
-- Importe o ficheiro `todo_list.sql` para a sua base de dados MySQL
-- Inicie o servidor local PHP:
+- Instalar um servidor local como XAMPP ou NGINX para rodar o MySQL.
+- Iniciar o MySQL e o Apache (caso use o XAMPP).
+- Ir a pasta backend.
+- Configurar a conexão com a base de dados no ficheiro config/db.php.
+- Importar o ficheiro todo_list.sql para a sua base de dados MySQL.
+- Iniciar o servidor local PHP:
 ```sh
 php -S localhost:8000 -t backend
 ```
 
 #### 3. Configuração do Frontend
-- Acesse a pasta `frontend`
-- Instale as dependências:
+- Ir a pasta `frontend`
+- Instalar as dependências:
 ```sh
 npm install
 ```
-- Inicie o servidor do frontend:
+- Iniciar o servidor do frontend:
 ```sh
 npm run dev
 ```
 
 ### Como Usar
-1. Abra a aplicação no navegador (`http://localhost:5173`)
-2. Registe um novo utilizador
-3. Faça login e gerencie as suas tarefas
+1. Abrir a aplicação no navegador (`http://localhost:5173`)
+2. Registar um novo utilizador
+3. Fazer login e gerencie as suas tarefas
 
 ### Rotas da API
 - `POST /api.php` - Lida com autenticação e gestão de tarefas
